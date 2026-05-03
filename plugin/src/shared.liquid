@@ -65,6 +65,21 @@
     </div>
     {% endunless %}
 
+    {% if view == 1 %}
+    <div class="item lcn-type-row hidden">
+      <div class="content flex flex--row flex--center-y gap--small">
+        <span class="{{ lbl_cls }}">{{ labels.type }}</span>
+        <span class="{{ val_cls }} lcn-type"></span>
+      </div>
+    </div>
+    <div class="item lcn-artist-row hidden">
+      <div class="content flex flex--row flex--center-y gap--small">
+        <span class="{{ lbl_cls }}">{{ labels.artist }}</span>
+        <span class="{{ val_cls }} lcn-artist"></span>
+      </div>
+    </div>
+    {% endif %}
+
     <div class="w--full {% if view <= 2 %}grid grid--cols-2 gap--small{% if view == 2 %} lg:portrait:flex lg:portrait:flex--col{% endif %}{% else %}flex flex--col{% endif %}">
       {% if view == 2 %}
       <div class="item lcn-ink-row hidden">
@@ -93,13 +108,15 @@
       </div>
       {% endif %}
 
-      {% if view != 4 %}
+      {% if view == 2 or view == 3 %}
       <div class="item lcn-type-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }}">{{ labels.type }}</span>
           <span class="{{ val_cls }} lcn-type"></span>
         </div>
       </div>
+      {% endif %}
+
       <div class="item lcn-lore-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }}">{{ labels.lore }}</span>
@@ -118,9 +135,17 @@
           <span class="{{ val_cls }} lcn-will"></span>
         </div>
       </div>
+
+      {% if view == 1 %}
+      <div class="item lcn-inkable-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }}">{{ labels.inkable }}</span>
+          <span class="{{ val_cls }} lcn-inkable"></span>
+        </div>
+      </div>
       {% endif %}
 
-      {% if view == 1 or view == 3 %}
+      {% if view == 3 %}
       <div class="item lcn-inkable-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }}">{{ labels.inkable }}</span>
@@ -206,7 +231,7 @@
     }
 
     show2('ink', item.color);
-    show2('cost', item.cost != null ? item.cost + ' {i}' : '');
+    show2('cost', item.cost != null ? item.cost + ' ◆' : '');
     show2('lore', item.lore != null ? item.lore + ' ◆' : '');
     show2('str', item.strength);
     show2('will', item.willpower);
@@ -217,11 +242,7 @@
     show2('inkable', item.inkable ? 'Yes' : 'No');
     show2('artist', item.artist);
 
-    var setYear = item.set_num ? "Set " + item.set_num : '';
-    var setLabel = item.set_name || '';
-    if (setYear && setLabel) setLabel += ' (' + setYear + ')';
-    else if (setYear) setLabel = setYear;
-    show2('set', setLabel);
+    show2('set', item.set_name || '');
 
     if (titleEl) titleEl.textContent = item.name || '';
     if (instEl)  instEl.textContent  = item.set_name || '';

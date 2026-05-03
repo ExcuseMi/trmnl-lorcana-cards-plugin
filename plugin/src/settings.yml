@@ -9,8 +9,7 @@ serverless_language: node
 polling_url: 'https://trmnl.bettens.dev/lorcana-cards/card?color={{ color | join: '','' | url_encode }}&rarity={{ rarity | join: '','' | url_encode }}&card_type={{ card_type | url_encode }}&set_id={{ set_id | url_encode }}'
 polling_headers: ''
 polling_body: ''
-name: Lorcana Cards
-refresh_interval: 15
+id: 298482
 custom_fields:
 - keyname: author_info
   name: About This Plugin
@@ -68,3 +67,5 @@ custom_fields:
   http_verb: post
   exclude_csrf_token: true
   optional: true
+name: Lorcana Cards
+refresh_interval: 15
