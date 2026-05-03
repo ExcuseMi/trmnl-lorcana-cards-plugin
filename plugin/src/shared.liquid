@@ -160,6 +160,12 @@
       </div>
       {% endif %}
     </div>
+
+    {% if view == 1 or view == 3 %}
+    <div class="lcn-flavor-row hidden">
+      <span class="label lcn-flavor" data-clamp="{% if view == 1 %}3{% else %}2{% endif %}" style="font-style:italic"></span>
+    </div>
+    {% endif %}
   </div>
 </div>
 
@@ -167,11 +173,11 @@
   {% if view == 1 %}
   lg:portrait:hidden
   {% elsif view == 3 %}
-  md:hidden portrait:flex lg:flex
+  hidden lg:flex lg:portrait:hidden
   {% elsif view == 4 %}
-  lg:portrait:hidden
+  hidden
   {% endif %}">
-  <img class="image w--8 h--8" src="https://github.com/ExcuseMi/trmnl-lorcana-cards-plugin/blob/main/assets/logo.png?raw=true" alt="Lorcana">
+  <img class="image h--8" src="https://github.com/ExcuseMi/trmnl-lorcana-cards-plugin/blob/main/assets/logo.png?raw=true" alt="Lorcana">
   <span class="title lcn-title"></span>
   {% if pool_warning %}<span class="label label--warning">{{ pool_warning }} cards</span>{% endif %}
   <span class="instance lcn-instance
@@ -239,6 +245,13 @@
     show2('artist', item.artist);
 
     show2('set', item.set_name || '');
+
+    if (item.flavor_text) {
+      var flavorEl = q('.lcn-flavor');
+      var flavorRow = q('.lcn-flavor-row');
+      if (flavorEl) flavorEl.textContent = item.flavor_text;
+      if (flavorRow) flavorRow.classList.remove('hidden');
+    }
 
     if (titleEl) titleEl.textContent = item.name || '';
     if (instEl)  instEl.textContent  = item.set_name || '';
