@@ -1,0 +1,105 @@
+[
+  {
+    "name": "4 cards (mixed colors)",
+    "input": {
+      "data": [
+        {
+          "id": "TFC-001",
+          "name": "Elsa - Snow Queen",
+          "color": "Amethyst",
+          "cost": 6,
+          "type": "Character",
+          "lore": 3,
+          "strength": 3,
+          "willpower": 6,
+          "inkable": false,
+          "rarity": "Legendary",
+          "set_name": "The First Chapter",
+          "set_num": 1,
+          "artist": "Jenna Gray",
+          "classifications": ["Storyborn", "Hero", "Queen"],
+          "image": "https://lorcana-api.com/images/elsa/snow_queen/elsa-snow_queen-large.png"
+        },
+        {
+          "id": "TFC-100",
+          "name": "Moana - Of Motunui",
+          "color": "Amber",
+          "cost": 3,
+          "type": "Character",
+          "lore": 2,
+          "strength": 2,
+          "willpower": 4,
+          "inkable": true,
+          "rarity": "Common",
+          "set_name": "The First Chapter",
+          "set_num": 1,
+          "artist": "Alexandre Dainche",
+          "classifications": ["Storyborn", "Hero"],
+          "image": "https://lorcana-api.com/images/moana/of_motunui/moana-of_motunui-large.png"
+        },
+        {
+          "id": "TFC-050",
+          "name": "Be Prepared",
+          "color": "Emerald",
+          "cost": 7,
+          "type": "Song",
+          "inkable": false,
+          "rarity": "Super Rare",
+          "set_name": "The First Chapter",
+          "set_num": 1,
+          "artist": "Matt Chapman",
+          "classifications": [],
+          "image": "https://lorcana-api.com/images/be_prepared/be_prepared-large.png"
+        },
+        {
+          "id": "ROF-010",
+          "name": "Magic Broom - Bucket Brigade",
+          "color": "Sapphire",
+          "cost": 2,
+          "type": "Character",
+          "lore": 1,
+          "strength": 1,
+          "willpower": 3,
+          "inkable": true,
+          "rarity": "Common",
+          "set_name": "Rise of the Floodborn",
+          "set_num": 2,
+          "artist": "Kendall Hale",
+          "classifications": ["Sorcerer's Apprentice"],
+          "image": "https://lorcana-api.com/images/magic_broom/bucket_brigade/magic_broom-bucket_brigade-large.png"
+        }
+      ]
+    }
+  },
+  {
+    "name": "pool warning",
+    "input": {
+      "data": [
+        {
+          "id": "TFC-001",
+          "name": "Elsa - Snow Queen",
+          "color": "Amethyst",
+          "cost": 6,
+          "type": "Character",
+          "lore": 3,
+          "strength": 3,
+          "willpower": 6,
+          "inkable": false,
+          "rarity": "Legendary",
+          "set_name": "The First Chapter",
+          "set_num": 1,
+          "artist": "Jenna Gray",
+          "classifications": ["Storyborn", "Hero", "Queen"],
+          "image": "https://lorcana-api.com/images/elsa/snow_queen/elsa-snow_queen-large.png"
+        }
+      ],
+      "pool_warning": 1
+    }
+  },
+  {
+    "name": "empty data",
+    "input": {
+      "data": []
+    }
+  }
+]

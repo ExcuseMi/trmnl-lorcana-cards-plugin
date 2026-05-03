@@ -1,0 +1,95 @@
+# TRMNLP configuration
+# {{ env.VARIABLE }} interpolation is available here
+---
+watch:
+  - .trmnlp.yml
+  - src
+
+custom_fields: {}
+
+variables:
+  trmnl:
+    system:
+      timestamp_utc: 1700000000
+    plugin_settings:
+      instance_name: "Lorcana Cards"
+      strategy: polling
+      dark_mode: "no"
+      no_screen_padding: "yes"
+      custom_fields_values:
+        color: ""
+        rarity: ""
+        card_type: ""
+        set_id: ""
+  labels:
+    cost: Cost
+    lore: Lore
+    str: Str
+    will: Wlp
+    type: Type
+    rarity: Rarity
+    set: Set
+    artist: Artist
+    ink: Ink
+    inkable: Inkable
+    franchise: Franchise
+  items:
+    - name: "Elsa - Snow Queen"
+      color: "Amethyst"
+      cost: 6
+      type: "Character"
+      lore: 3
+      strength: 3
+      willpower: 6
+      inkable: false
+      rarity: "Legendary"
+      set_name: "The First Chapter"
+      set_num: 1
+      artist: "Jenna Gray"
+      image: "https://lorcana-api.com/images/elsa/snow_queen/elsa-snow_queen-large.png"
+      classifications:
+        - Storyborn
+        - Hero
+        - Queen
+    - name: "Moana - Of Motunui"
+      color: "Amber"
+      cost: 3
+      type: "Character"
+      lore: 2
+      strength: 2
+      willpower: 4
+      inkable: true
+      rarity: "Common"
+      set_name: "The First Chapter"
+      set_num: 1
+      artist: "Alexandre Dainche"
+      image: "https://lorcana-api.com/images/moana/of_motunui/moana-of_motunui-large.png"
+      classifications:
+        - Storyborn
+        - Hero
+    - name: "Be Prepared"
+      color: "Emerald"
+      cost: 7
+      type: "Song"
+      inkable: false
+      rarity: "Super Rare"
+      set_name: "The First Chapter"
+      set_num: 1
+      artist: "Matt Chapman"
+      image: "https://lorcana-api.com/images/be_prepared/be_prepared-large.png"
+      classifications: []
+    - name: "Magic Broom - Bucket Brigade"
+      color: "Sapphire"
+      cost: 2
+      type: "Character"
+      lore: 1
+      strength: 1
+      willpower: 3
+      inkable: true
+      rarity: "Common"
+      set_name: "Rise of the Floodborn"
+      set_num: 2
+      artist: "Kendall Hale"
+      image: "https://lorcana-api.com/images/magic_broom/bucket_brigade/magic_broom-bucket_brigade-large.png"
+      classifications:
+        - Sorcerer's Apprentice

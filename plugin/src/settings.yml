@@ -1,0 +1,70 @@
+---
+strategy: polling
+no_screen_padding: 'yes'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: 3.1.0
+serverless_language: node
+polling_url: 'https://trmnl.bettens.dev/lorcana-cards/card?color={{ color | join: '','' | url_encode }}&rarity={{ rarity | join: '','' | url_encode }}&card_type={{ card_type | url_encode }}&set_id={{ set_id | url_encode }}'
+polling_headers: ''
+polling_body: ''
+name: Lorcana Cards
+refresh_interval: 15
+custom_fields:
+- keyname: author_info
+  name: About This Plugin
+  field_type: author_bio
+  description: Discover Disney Lorcana cards on your TRMNL — browse sets, hunt for Enchanteds, or enjoy the artwork. Filter by ink color, rarity, type, or set. A new selection appears each refresh.<br/><br/><strong>Data:</strong> <a href="https://lorcana-api.com" target="_blank">Lorcana API</a>.
+  github_url: https://github.com/ExcuseMi/trmnl-lorcana-cards-plugin
+  category: games,art
+- keyname: color
+  field_type: select
+  multiple: true
+  name: Ink Color
+  description: Show only cards of one or more ink colors. Leave empty for all colors.
+  help_text: Use <kbd>⌘</kbd>+<kbd>click</kbd> or <kbd>ctrl</kbd>+<kbd>click</kbd> to select and deselect multiple options.
+  options:
+  - Amber: Amber
+  - Amethyst: Amethyst
+  - Emerald: Emerald
+  - Ruby: Ruby
+  - Sapphire: Sapphire
+  - Steel: Steel
+  optional: true
+- keyname: rarity
+  field_type: select
+  multiple: true
+  name: Rarity
+  description: Show only cards of one or more rarities. Leave empty for all rarities. Great for hunting Legendaries or Enchanteds.
+  help_text: Use <kbd>⌘</kbd>+<kbd>click</kbd> or <kbd>ctrl</kbd>+<kbd>click</kbd> to select and deselect multiple options.
+  options:
+  - Common: Common
+  - Uncommon: Uncommon
+  - Rare: Rare
+  - Super Rare: Super Rare
+  - Legendary: Legendary
+  - Enchanted: Enchanted
+  optional: true
+- keyname: card_type
+  field_type: select
+  name: Card Type
+  description: Show only cards of a specific type. Leave empty for all types.
+  options:
+  - All: ''
+  - Character: Character
+  - Action: Action
+  - Item: Item
+  - Song: Song
+  - Location: Location
+  default: ''
+  optional: true
+- keyname: set_id
+  field_type: xhrSelectSearch
+  name: Set
+  description: Filter to a specific set.
+  help_text: Choose <strong>Most Recent ★</strong> to always show the latest released set.
+  endpoint: https://trmnl.bettens.dev/lorcana-cards/sets
+  http_verb: post
+  exclude_csrf_token: true
+  optional: true
