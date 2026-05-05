@@ -49,7 +49,7 @@ The backend expects a Redis instance. Docker Compose starts one automatically.
 <!-- PLUGIN_STATS_START -->
 ## 🚀 TRMNL Plugin(s)
 
-*Last updated: 2026-05-04 08:26:41 UTC*
+*Last updated: 2026-05-05 08:06:01 UTC*
 
 
 ## 🔒 Plugin ID: 298482
