@@ -70,43 +70,72 @@
       label--base lg:label--large
       {% endif %}" data-clamp="2"></div>
 
-    {% if view == 1 %}
-    <div class="item lcn-release-date-row hidden">
-      <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.released }}</span>
-        <span class="{{ val_cls }} lcn-release-date"></span>
+    <div class="w--full {{gap}} p--0 m--0 mt--1 {% if view == 2 %}grid grid--cols-2 lg:portrait:grid--cols-1 gap--none{% else %}flex flex--col{% endif %}">
+      {% if view == 1 %}
+      <div class="item lcn-release-date-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.released }}</span>
+          <span class="{{ val_cls }} lcn-release-date"></span>
+        </div>
       </div>
-    </div>
-    <div class="item lcn-ink-row hidden">
-      <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.ink }}</span>
-        <span class="{{ val_cls }} lcn-ink"></span>
+      <div class="item lcn-ink-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.ink }}</span>
+          <span class="{{ val_cls }} lcn-ink"></span>
+        </div>
       </div>
-    </div>
-    <div class="item lcn-rarity-row hidden">
-      <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.rarity }}</span>
-        <span class="{{ val_cls }} lcn-rarity"></span>
+      <div class="item lcn-rarity-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.rarity }}</span>
+          <span class="{{ val_cls }} lcn-rarity"></span>
+        </div>
       </div>
-    </div>
-    {% endif %}
+      <div class="item lcn-type-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.type }}</span>
+          <span class="{{ val_cls }} lcn-type"></span>
+        </div>
+      </div>
+      <div class="item lcn-artist-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.artist }}</span>
+          <span class="{{ val_cls }} lcn-artist"></span>
+        </div>
+      </div>
+      <div class="grid grid--cols-2 gap--none w--full">
+        <div class="item lcn-cost-row hidden">
+          <div class="content flex flex--row flex--center-y gap--small">
+            <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.cost }}</span>
+            <span class="{{ val_cls }} lcn-cost"></span>
+          </div>
+        </div>
+        <div class="item lcn-lore-row hidden">
+          <div class="content flex flex--row flex--center-y gap--small">
+            <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.lore }}</span>
+            <span class="{{ val_cls }} lcn-lore"></span>
+          </div>
+        </div>
+        <div class="item lcn-str-row hidden">
+          <div class="content flex flex--row flex--center-y gap--small">
+            <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.str }}</span>
+            <span class="{{ val_cls }} lcn-str"></span>
+          </div>
+        </div>
+        <div class="item lcn-will-row hidden">
+          <div class="content flex flex--row flex--center-y gap--small">
+            <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.will }}</span>
+            <span class="{{ val_cls }} lcn-will"></span>
+          </div>
+        </div>
+        <div class="item lcn-inkable-row hidden">
+          <div class="content flex flex--row flex--center-y gap--small">
+            <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.inkable }}</span>
+            <span class="{{ val_cls }} lcn-inkable"></span>
+          </div>
+        </div>
+      </div>
+      {% endif %}
 
-    {% if view == 1 %}
-    <div class="item lcn-type-row hidden">
-      <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.type }}</span>
-        <span class="{{ val_cls }} lcn-type"></span>
-      </div>
-    </div>
-    <div class="item lcn-artist-row hidden">
-      <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.artist }}</span>
-        <span class="{{ val_cls }} lcn-artist"></span>
-      </div>
-    </div>
-    {% endif %}
-
-    <div class="w--full {{gap}} p--0 m--0 mt--1 {% if view == 1 or view == 2 %}grid {% if view == 2 %}grid--cols-2 lg:portrait:grid--cols-1{% else %}grid--cols-2{% endif %} gap--none{% else %}flex flex--col{% endif %}">
       {% if view == 2 %}
       {{- '<!-- info -->' }}
       <div class="item lcn-ink-row hidden">
@@ -227,7 +256,7 @@
       </div>
       {% endif %}
 
-      {% unless view == 2 %}
+      {% if view == 3 or view == 4 %}
       <div class="item lcn-cost-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.cost }}</span>
@@ -250,15 +279,6 @@
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.will }}</span>
           <span class="{{ val_cls }} lcn-will"></span>
-        </div>
-      </div>
-      {% endunless %}
-
-      {% if view == 1 %}
-      <div class="item lcn-inkable-row hidden">
-        <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.inkable }}</span>
-          <span class="{{ val_cls }} lcn-inkable"></span>
         </div>
       </div>
       {% endif %}
