@@ -1,7 +1,7 @@
 {% template main %}
 {% assign first_column_label_width = "w--28 no-shrink" %}
 {% assign dual_column_label_width = "w--28 no-shrink" %}
-{% assign flavour_cls = "description description--large lg:description--xxlarge bg--gray-20 text--white rounded rounded--small m--0_5 p--1 pl--2 pr--2" %}
+{% assign flavour_cls = "description description--large lg:description--xlarge bg--gray-20 text--white rounded rounded--small m--0 p--1" %}
 {% assign name_cls = "p--3" %}
 {% if view == 1 %}
     {% assign lbl_cls = "label label--base lg:label--large pl--2 pr--3 pt--1 pb--1 m--0_5" %}
@@ -63,9 +63,9 @@
       {% if view == 1 %}
       label--large lg:label--xlarge
       {% elsif view == 2 %}
-      label--large lg:label--xlarge
+      label--base lg:label--large
       {% elsif view == 3 %}
-      label--large lg:label--xlarge
+      label--base lg:label--large
       {% elsif view == 4 %}
       label--base lg:label--large
       {% endif %}" data-clamp="2"></div>
@@ -240,13 +240,13 @@
           <span class="{{ val_cls }} lcn-lore"></span>
         </div>
       </div>
-      <div class="item lcn-str-row hidden">
+      <div class="item lcn-str-row hidden {% if view == 4 %}md:hidden{% endif %}">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.str }}</span>
           <span class="{{ val_cls }} lcn-str"></span>
         </div>
       </div>
-      <div class="item lcn-will-row hidden">
+      <div class="item lcn-will-row hidden {% if view == 4 %}md:hidden{% endif %}">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.will }}</span>
           <span class="{{ val_cls }} lcn-will"></span>
@@ -280,7 +280,7 @@
     </div>
 
 
-    {% if view == 1 %}{% assign flavor_clamp = 3 %}{% else %}{% assign flavor_clamp = 2 %}{% endif %}
+    {% if view == 1 %}{% assign flavor_clamp = 4 %}{% else %}{% assign flavor_clamp = 4 %}{% endif %}
     <div style="flex:1 1 0"></div>
     <div class="item lcn-flavor-row content hidden">
       <div class="{{flavour_cls}} w--full lcn-flavor" data-clamp="{{ flavor_clamp }}" style="font-style:italic"></div>
@@ -299,10 +299,10 @@
   <img class="image h--8" src="https://github.com/ExcuseMi/trmnl-lorcana-cards-plugin/blob/main/assets/logo.png?raw=true" alt="Lorcana">
   <span class="title lcn-title text--stroke"></span>
   {% if pool_warning %}<span class="label label--warning">{{ pool_warning }} cards</span>{% endif %}
-  <span class="instance lcn-instance text--stroke
+  <span class="instance 
     {% if view >= 3 %}
     md:portrait:hidden
-    {% endif %}"></span>
+    {% endif %}"><span class="lcn-instance label rounded rounded--small p--1 bg--gray-50"></span></span>
 </div>
 
 <script>
