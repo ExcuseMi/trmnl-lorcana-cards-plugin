@@ -67,5 +67,15 @@ custom_fields:
   http_verb: post
   exclude_csrf_token: true
   optional: true
+- keyname: date_format
+  field_type: select
+  name: Date format
+  description: Select the date format you'd like to be used
+  optional: true
+  options:
+  - Month/Day/Year: "%m/%d/%Y"
+  - Year-Month-Day: "%Y-%m-%d"
+  - Day/Month/Year: "%d/%m/%Y"
+  default: "%Y-%m-%d"
 name: Lorcana Cards
 refresh_interval: 15

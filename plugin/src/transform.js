@@ -11,6 +11,7 @@ function transform(input) {
     ink: 'Ink',
     inkable: 'Inkable',
     franchise: 'Franchise',
+    released: 'Released',
   };
 
   var raw = Array.isArray(input.data) ? input.data : [];

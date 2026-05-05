@@ -1,17 +1,41 @@
 {% template main %}
+{% assign first_column_label_width = "w--24 no-shrink" %}
+{% assign dual_column_label_width = "w--20 no-shrink" %}
+
 {% if view == 1 %}
-{% assign lbl_cls = "label label--base lg:label--xlarge bg--gray-75 rounded pl--2 pr--2" %}
-{% assign val_cls = "description description--large lg:description--xxlarge" %}
-{% assign rar_cls = "label label--base lg:label--large" %}
+    {% assign lbl_cls = "label label--base lg:label--large pl--2 pr--3 pt--1 pb--1 m--0_5" %}
+    {% assign val_cls = "description description--large lg:description--xxlarge bg--white rounded rounded--small m--0_5 p--1 pl--2 pr--2" %}
+    {% assign rar_cls = "description description--large lg:description--xxlarge bg--white rounded rounded--small m--0_5 p--1 pl--2 pr--2" %}
+    {% assign gap = "gap--none md:gap--none lg:gap--small" %}
 {% else %}
-{% assign lbl_cls = "label label--base lg:label--large bg--gray-75 rounded pl--2 pr--2" %}
-{% assign val_cls = "description description--large lg:description--xlarge" %}
-{% assign rar_cls = "label label--base" %}
+    {% assign lbl_cls = "label label--small lg:label--base m--0_5" %}
+    {% assign val_cls = "description description--base lg:description--large bg--white rounded rounded--small p--1 pl--2 pr--2" %}
+    {% assign rar_cls = "description description--base lg:description--large bg--white rounded rounded--small p--1 pl--2 pr--2" %}
+    {% assign gap = "md:gap--xsmall lg:gap--small portrait:gap--none lg:portrait:gap--small" %}
+    {% if view == 2 %}
+        {% assign first_column_label_width = "w--16 no-shrink" %}
+        {% assign dual_column_label_width = "w--16 no-shrink" %}
+    {% elsif view == 3 %}
+        {% assign first_column_label_width = "w--16 no-shrink" %}
+        {% assign dual_column_label_width = "w--16 no-shrink" %}
+    {% elsif view == 4 %}
+        {% assign first_column_label_width = "w--16 no-shrink" %}
+        {% assign dual_column_label_width = "w--16 no-shrink" %}
+    {% endif %}
 {% endif %}
 
 <script>var __lcn = {{ items | json }};</script>
 
-<div class="layout {% unless view == 3 %}layout--row {% else %}layout--col{% endunless %} gap--medium h--full layout--top">
+<div class="layout h--full
+  {% if view == 1 %}
+  layout--row gap--small
+  {% elsif view == 2 %}
+  layout--row gap--small
+  {% elsif view == 3 %}
+  layout--col gap--small
+  {% elsif view == 4 %}
+  layout--row gap--small p--1
+  {% endif %}">
   <img class="lcn-img image image-dither image--contain h--full rounded
     {% if view == 1 %}    portrait:hidden lg:portrait:block
     {% elsif view == 2 %}
@@ -27,30 +51,47 @@
     {% endif %}"
     alt="">
 
-  <div class="flex--col gap--small stretch-x w--full
+  <div class="flex--col stretch-x w--full h--full 4bit:bg--gray-75 2bit:bg--gray-75 bg--gray-75 p--1 lg:p--2 m--1 outline rounded {{gap}}
     {% if view == 1 %}   flex portrait:hidden
     {% elsif view == 2 %}flex portrait:hidden lg:portrait:flex
     {% elsif view == 3 %}hidden portrait:flex
     {% elsif view == 4 %}flex portrait:hidden portrait:m::flex lg:portrait:hidden
     {% endif %}">
-    <span class="label label--primary label--xlarge lg:label--xxxlarge lcn-name" data-clamp="2"></span>
+    <span class="label rounded rounded--small p--1 pl--3 pr--3 w--full text--stroke lcn-name
+      {% if view == 1 %}
+      label--xlarge lg:label--xxlarge
+      {% elsif view == 2 %}
+      label--xlarge lg:label--xxlarge
+      {% elsif view == 3 %}
+      label--xlarge lg:label--xxlarge
+      {% elsif view == 4 %}
+      label--base lg:label--large
+      {% endif %}" data-clamp="2"></span>
 
     {% unless view == 2 %}
+    {% unless view == 4 %}
+    <div class="item lcn-release-date-row hidden">
+      <div class="content flex flex--row flex--center-y gap--small">
+        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.released }}</span>
+        <span class="{{ val_cls }} lcn-release-date"></span>
+      </div>
+    </div>
+    {% endunless %}
     <div class="item lcn-ink-row hidden">
       <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }}">{{ labels.ink }}</span>
+        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.ink }}</span>
         <span class="{{ val_cls }} lcn-ink"></span>
       </div>
     </div>
     <div class="item lcn-cost-row hidden">
       <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }}">{{ labels.cost }}</span>
+        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.cost }}</span>
         <span class="{{ val_cls }} lcn-cost"></span>
       </div>
     </div>
     <div class="item lcn-rarity-row hidden">
       <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }}">{{ labels.rarity }}</span>
+        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.rarity }}</span>
         <span class="{{ rar_cls }} lcn-rarity"></span>
       </div>
     </div>
@@ -59,7 +100,7 @@
     {% unless view == 1 or view == 2 %}
     <div class="item lcn-set-row hidden">
       <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }}">{{ labels.set }}</span>
+        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.set }}</span>
         <span class="{{ val_cls }} lcn-set"></span>
       </div>
     </div>
@@ -68,42 +109,48 @@
     {% if view == 1 %}
     <div class="item lcn-type-row hidden">
       <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }}">{{ labels.type }}</span>
+        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.type }}</span>
         <span class="{{ val_cls }} lcn-type"></span>
       </div>
     </div>
     <div class="item lcn-artist-row hidden">
       <div class="content flex flex--row flex--center-y gap--small">
-        <span class="{{ lbl_cls }}">{{ labels.artist }}</span>
+        <span class="{{ lbl_cls }} {{first_column_label_width}}">{{ labels.artist }}</span>
         <span class="{{ val_cls }} lcn-artist"></span>
       </div>
     </div>
     {% endif %}
 
-    <div class="w--full {% if view <= 2 %}grid grid--cols-2 gap--small{% if view == 2 %} lg:portrait:flex lg:portrait:flex--col{% endif %}{% else %}flex flex--col{% endif %}">
+    <div class="w--full {{gap}} p--0 m--0 mt--1 {% if view <= 2 %}grid {% if view == 2 %}grid--cols-2 lg:portrait:grid--cols-1{% else %}grid--cols-2{% endif %} gap--none{% else %}flex flex--col{% endif %}">
       {% if view == 2 %}
       <div class="item lcn-ink-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.ink }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.ink }}</span>
           <span class="{{ val_cls }} lcn-ink"></span>
         </div>
       </div>
       <div class="item lcn-cost-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.cost }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.cost }}</span>
           <span class="{{ val_cls }} lcn-cost"></span>
         </div>
       </div>
       <div class="item lcn-rarity-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.rarity }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.rarity }}</span>
           <span class="{{ rar_cls }} lcn-rarity"></span>
         </div>
       </div>
       <div class="item lcn-set-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.set }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.set }}</span>
           <span class="{{ val_cls }} lcn-set"></span>
+        </div>
+      </div>
+      <div class="item lcn-release-date-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.released }}</span>
+          <span class="{{ val_cls }} lcn-release-date"></span>
         </div>
       </div>
       {% endif %}
@@ -111,7 +158,7 @@
       {% if view == 2 or view == 3 %}
       <div class="item lcn-type-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.type }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.type }}</span>
           <span class="{{ val_cls }} lcn-type"></span>
         </div>
       </div>
@@ -119,19 +166,19 @@
 
       <div class="item lcn-lore-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.lore }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.lore }}</span>
           <span class="{{ val_cls }} lcn-lore"></span>
         </div>
       </div>
       <div class="item lcn-str-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.str }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.str }}</span>
           <span class="{{ val_cls }} lcn-str"></span>
         </div>
       </div>
       <div class="item lcn-will-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.will }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.will }}</span>
           <span class="{{ val_cls }} lcn-will"></span>
         </div>
       </div>
@@ -139,7 +186,7 @@
       {% if view == 1 %}
       <div class="item lcn-inkable-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.inkable }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.inkable }}</span>
           <span class="{{ val_cls }} lcn-inkable"></span>
         </div>
       </div>
@@ -148,13 +195,13 @@
       {% if view == 3 %}
       <div class="item lcn-inkable-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.inkable }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.inkable }}</span>
           <span class="{{ val_cls }} lcn-inkable"></span>
         </div>
       </div>
       <div class="item lcn-artist-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }}">{{ labels.artist }}</span>
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.artist }}</span>
           <span class="{{ val_cls }} lcn-artist"></span>
         </div>
       </div>
@@ -178,15 +225,30 @@
   hidden
   {% endif %}">
   <img class="image h--8" src="https://github.com/ExcuseMi/trmnl-lorcana-cards-plugin/blob/main/assets/logo.png?raw=true" alt="Lorcana">
-  <span class="title lcn-title"></span>
+  <span class="title lcn-title text--stroke"></span>
   {% if pool_warning %}<span class="label label--warning">{{ pool_warning }} cards</span>{% endif %}
-  <span class="instance lcn-instance
+  <span class="instance lcn-instance text--stroke
     {% if view >= 3 %}
     md:portrait:hidden
     {% endif %}"></span>
 </div>
 
 <script>
+  function parseISODate(dateStr) {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  function strftime(date, formatStr) {
+    const pad = (n) => String(n).padStart(2, '0');
+    const replacements = {
+      '%Y': date.getFullYear(),
+      '%m': pad(date.getMonth() + 1),
+      '%d': pad(date.getDate())
+    };
+    return formatStr.replace(/%[Ymd]/g, (match) => replacements[match] || match);
+  }
+
   (function() {
     var views = Array.from(document.querySelectorAll('.view'));
     var host  = document.currentScript.closest('.view') || document.body;
@@ -212,24 +274,34 @@
     var nameEl = q('.lcn-name');
     if (nameEl) nameEl.textContent = item.name || '';
 
+    function rarityClass(r) {
+      r = (r || '').toLowerCase();
+      if (r === 'enchanted') return 'bg--red 1bit:text--white 1bit:bg--black 2bit:text--white 2bit:bg--black 4bit:text--white 4bit:bg--black';
+      if (r === 'legendary') return 'bg--yellow 1bit:text--white 1bit:bg--gray-30 2bit:text--white 2bit:bg--gray-30 4bit:text--white 4bit:bg--gray-30';
+      if (r === 'super rare') return 'bg--yellow-50 1bit:text--white 1bit:bg--gray-40 2bit:text--white 2bit:bg--gray-40 4bit:text--white 4bit:bg--gray-40';
+      if (r === 'rare') return 'bg--yellow-50 1bit:text--white 1bit:bg--gray-40 2bit:text--white 2bit:bg--gray-40 4bit:text--white 4bit:bg--gray-40';
+      return 'bg--gray-65 text--stroke';
+    }
+
+    if (nameEl) {
+      rarityClass(item.rarity).trim().split(/\s+/).forEach(function(cls) {
+        if (cls) nameEl.classList.add(cls);
+      });
+    }
+
     function show2(key, value, extraClass) {
       if (!value && value !== 0) return;
       var val = q('.lcn-' + key);
       var row = q('.lcn-' + key + '-row');
       if (val) {
         val.textContent = String(value);
-        if (extraClass) val.classList.add(extraClass);
+        if (extraClass) {
+          extraClass.trim().split(/\s+/).forEach(function(cls) {
+            if (cls) val.classList.add(cls);
+          });
+        }
       }
       if (row) row.classList.remove('hidden');
-    }
-
-    function rarityClass(r) {
-      r = (r || '').toLowerCase();
-      if (r === 'enchanted') return 'label--error';
-      if (r === 'legendary') return 'label--warning';
-      if (r === 'super rare') return 'label--primary';
-      if (r === 'rare') return 'label--primary';
-      return '';
     }
 
     show2('ink', item.color);
@@ -240,11 +312,16 @@
     show2('type', item.classifications
       ? [item.type].concat(item.classifications).filter(Boolean).join(' · ')
       : item.type);
-    show2('rarity', item.rarity, rarityClass(item.rarity));
+    show2('rarity', item.rarity);
     show2('inkable', item.inkable ? 'Yes' : 'No');
     show2('artist', item.artist);
-
     show2('set', item.set_name || '');
+
+    if (item.set_release_date) {
+      var format = {{ trmnl.plugin_settings.custom_fields_values.date_format | default: "%Y-%m-%d" | json }};
+      var releaseDate = parseISODate(item.set_release_date);
+      show2('release-date', strftime(releaseDate, format));
+    }
 
     if (item.flavor_text) {
       var flavorEl = q('.lcn-flavor');

@@ -23,4 +23,5 @@ def shape_card(raw: dict) -> dict:
         'image': raw.get('Image', ''),
         'franchise': raw.get('Franchise', ''),
         'card_num': raw.get('Card_Num', ''),
+        'set_release_date': raw.get('Release_Date', ''),
     }
