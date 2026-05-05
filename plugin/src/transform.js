@@ -2,8 +2,8 @@ function transform(input) {
   var LABELS = {
     cost: 'Cost',
     lore: 'Lore',
-    str: 'Str',
-    will: 'Wlp',
+    str: 'Strength',
+    will: 'Willpower',
     type: 'Type',
     rarity: 'Rarity',
     set: 'Set',
