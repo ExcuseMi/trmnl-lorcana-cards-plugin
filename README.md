@@ -49,16 +49,17 @@ The backend expects a Redis instance. Docker Compose starts one automatically.
 <!-- PLUGIN_STATS_START -->
 ## 🚀 TRMNL Plugin(s)
 
-*Last updated: 2026-05-06 08:23:48 UTC*
+*Last updated: 2026-05-07 08:30:19 UTC*
 
 
-## 🔒 Plugin ID: 298482
+## <img src="assets/plugin-images/298482_icon.png" alt="Lorcana Cards icon" width="32"/> [Lorcana Cards](https://trmnl.com/recipes/298482)
 
-**Status**: ⏳ Not yet published on TRMNL or API unavailable
+![Installs](https://trmnl-badges.gohk.xyz/badge/installs?recipe=298482) ![Forks](https://trmnl-badges.gohk.xyz/badge/forks?recipe=298482)
 
-This plugin is configured but either hasn't been published to the TRMNL marketplace yet or the API is temporarily unavailable.
+![Lorcana Cards screenshot](assets/plugin-images/298482_screenshot.png)
 
-**Plugin URL**: https://usetrmnl.com/recipes/298482
+### Description
+Discover Disney Lorcana cards on your TRMNL — browse sets, hunt for Enchanteds, or enjoy the artwork. Filter by ink color, rarity, type, or set. A new selection appears each refresh.<br/><br/><strong>Data:</strong> <a href="https://lorcana-api.com" target="_blank">Lorcana API</a>.
 
 ---
 
