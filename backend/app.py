@@ -60,10 +60,44 @@ async def card():
         return jsonify({'error': 'Failed to fetch cards'}), 503
 
     selected = random.sample(cached, min(4, len(cached)))
+    set_lookup = await _get_set_lookup()
+    if set_lookup:
+        for c in selected:
+            if not c.get('set_release_date') and c.get('set_id'):
+                c['set_release_date'] = set_lookup.get(c['set_id'], '')
     resp = {'data': selected}
     if len(cached) < LOW_CARD_WARNING:
         resp['pool_warning'] = len(cached)
     return jsonify(resp)
+
+
+async def _fetch_raw_sets() -> list | None:
+    try:
+        cached = await _redis.get(SETS_CACHE_KEY)
+        if cached:
+            return json.loads(cached)
+    except Exception:
+        pass
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(LORCANA_SETS_API, timeout=aiohttp.ClientTimeout(total=15)) as resp:
+                resp.raise_for_status()
+                raw_sets = await resp.json()
+        try:
+            await _redis.set(SETS_CACHE_KEY, json.dumps(raw_sets), ex=86400)
+        except Exception:
+            pass
+        return raw_sets
+    except Exception as exc:
+        log.error('Error fetching sets: %s', exc)
+        return None
+
+
+async def _get_set_lookup() -> dict:
+    raw_sets = await _fetch_raw_sets()
+    if not raw_sets:
+        return {}
+    return {s['Set_ID']: s.get('Release_Date', '') for s in raw_sets if s.get('Set_ID')}
 
 
 @app.route('/sets', methods=['GET', 'POST', 'OPTIONS'])
@@ -72,28 +106,9 @@ async def sets():
         return _cors(Response('', status=204))
 
     search = await _parse_search()
-
-    raw_sets = None
-    try:
-        cached = await _redis.get(SETS_CACHE_KEY)
-        if cached:
-            raw_sets = json.loads(cached)
-    except Exception:
-        pass
-
+    raw_sets = await _fetch_raw_sets()
     if raw_sets is None:
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(LORCANA_SETS_API, timeout=aiohttp.ClientTimeout(total=15)) as resp:
-                    resp.raise_for_status()
-                    raw_sets = await resp.json()
-            try:
-                await _redis.set(SETS_CACHE_KEY, json.dumps(raw_sets), ex=86400)
-            except Exception:
-                pass
-        except Exception as exc:
-            log.error('Error fetching sets: %s', exc)
-            return _cors(jsonify({'error': 'Failed to fetch sets'})), 503
+        return _cors(jsonify({'error': 'Failed to fetch sets'})), 503
 
     result = _build_sets(raw_sets, search)
     return _cors(Response(json.dumps(result), content_type='application/json'))
@@ -118,7 +133,7 @@ def _build_sets(raw_sets: list, search: str) -> list:
     result = []
     for s in raw_sets:
         sid = s.get('Set_ID') or s.get('id', '')
-        name = s.get('Set_Name') or s.get('name', '')
+        name = s.get('Name') or s.get('Set_Name') or s.get('name', '')
         release_date = s.get('Release_Date') or s.get('release_date', '')
         year_text = f" ({release_date[:4]})" if release_date else ''
         label = f"{name}{year_text}"
