@@ -1,18 +1,20 @@
 function transform(input) {
   var LABELS = {
+    set: 'Set',
+    released: 'Released',
+
+    num: 'No.',
+    franchise: 'Franchise',
+    ink: 'Ink',
+    type: 'Type',
+    rarity: 'Rarity',
+    artist: 'Artist',
     cost: 'Cost',
     lore: 'Lore',
     str: 'Strength',
     will: 'Willpower',
-    type: 'Type',
-    rarity: 'Rarity',
-    artist: 'Artist',
-    ink: 'Ink',
     inkable: 'Inkable',
-    franchise: 'Franchise',
-    set: 'Set',
-    num: 'No.',
-    released: 'Released',
+
   };
 
   var raw = Array.isArray(input.data) ? input.data : [];
