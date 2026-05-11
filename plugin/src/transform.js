@@ -11,6 +11,7 @@ function transform(input) {
     ink: 'Ink',
     inkable: 'Inkable',
     franchise: 'Franchise',
+    num: 'No.',
     released: 'Released',
   };
 

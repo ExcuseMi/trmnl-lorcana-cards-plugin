@@ -63,8 +63,12 @@ async def card():
     set_lookup = await _get_set_lookup()
     if set_lookup:
         for c in selected:
-            if not c.get('set_release_date') and c.get('set_id'):
-                c['set_release_date'] = set_lookup.get(c['set_id'], '')
+            entry = set_lookup.get(c.get('set_id', ''))
+            if entry:
+                if not c.get('set_release_date'):
+                    c['set_release_date'] = entry['release_date']
+                if not c.get('set_total_cards'):
+                    c['set_total_cards'] = entry['cards']
     resp = {'data': selected}
     if len(cached) < LOW_CARD_WARNING:
         resp['pool_warning'] = len(cached)
@@ -97,7 +101,10 @@ async def _get_set_lookup() -> dict:
     raw_sets = await _fetch_raw_sets()
     if not raw_sets:
         return {}
-    return {s['Set_ID']: s.get('Release_Date', '') for s in raw_sets if s.get('Set_ID')}
+    return {
+        s['Set_ID']: {'release_date': s.get('Release_Date', ''), 'cards': s.get('Cards', 0)}
+        for s in raw_sets if s.get('Set_ID')
+    }
 
 
 @app.route('/sets', methods=['GET', 'POST', 'OPTIONS'])
