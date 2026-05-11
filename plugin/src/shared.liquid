@@ -1,98 +1,33 @@
 {% template main %}
-{% assign first_column_label_width = "w--28 no-shrink" %}
-{% assign dual_column_label_width = "w--28 no-shrink" %}
-{% assign flavour_cls = "description description--large lg:description--xlarge bg--gray-20 white__text rounded rounded--small m--0 p--0_5" %}
-{% assign name_cls = "p--3" %}
-{% if view == 1 %}
-    {% assign lbl_cls = "label label--base lg:label--large pl--2 pr--3 pt--0_5 pb--0_5" %}
-    {% assign val_cls = "description description--large lg:description--xlarge bg--white rounded rounded--small pt--0_5 pb--0_5 pl--2 pr--2" %}
-{% else %}
-    {% assign lbl_cls = "label label--small lg:label--base" %}
-    {% assign val_cls = "description description--base lg:description--large bg--white rounded rounded--small pt--0_5 pb--0_5 pl--2 pr--2" %}
-    {% assign gap = "md:gap--xsmall lg:gap--small portrait:gap--none lg:portrait:gap--small" %}
-    {% assign name_cls = "p--2" %}
-
-    {% if view == 2 %}
-        {% assign first_column_label_width = "w--24 no-shrink" %}
-        {% assign dual_column_label_width = "w--24 no-shrink" %}
-    {% elsif view == 3 %}
-        {% assign first_column_label_width = "w--20 no-shrink" %}
-        {% assign dual_column_label_width = "w--20 no-shrink" %}
-        {% assign gap = "gap--xsmall md:gap--xsmall portrait:gap--xsmall lg:portrait:gap--small" %}
-    {% elsif view == 4 %}
-        {% assign first_column_label_width = "w--16 no-shrink" %}
-        {% assign dual_column_label_width = "w--16 no-shrink" %}
-    {% endif %}
-{% endif %}
-<style>
-    .white__text { color: white; }
-</style>
+<style>.white__text { color: white; }</style>
 <script>
   var __lcn = {{ items | json }};
   var __cfg = {
-    view:    {{ view }},
-    lblCls:  {{ lbl_cls | json }},
-    valCls:  {{ val_cls | json }},
-    lblW:    {{ dual_column_label_width | json }},
-    dateFmt: {{ trmnl.plugin_settings.custom_fields_values.date_format | default: "%Y-%m-%d" | json }},
-    name:    {{ trmnl.plugin_settings.instance_name | json }}
+    view:        {{ view }},
+    dateFmt:     {{ trmnl.plugin_settings.custom_fields_values.date_format | default: "%Y-%m-%d" | json }},
+    name:        {{ trmnl.plugin_settings.instance_name | json }},
+    poolWarning: {% if pool_warning %}{{ pool_warning }}{% else %}null{% endif %}
   };
 </script>
 
-<div class="layout h--full
-  {% if view == 1 %}layout--row gap--small
-  {% elsif view == 2 %}layout--row gap--small
-  {% elsif view == 3 %}layout--col gap--small
-  {% elsif view == 4 %}layout--row gap--small p--1
-  {% endif %}">
-  <img class="lcn-img image image-dither image--contain h--full rounded
-    {% if view == 1 %}portrait:hidden lg:portrait:block
-    {% elsif view == 3 %}portrait:hidden lg:hidden
-    {% elsif view == 4 %}portrait:hidden
-    {% endif %}" alt="">
-  <img class="lcn-img image image-dither image--contain w--full rounded p--2
-    {% if view == 1 %}hidden portrait:block lg:portrait:hidden
-    {% elsif view == 2 %}hidden
-    {% elsif view == 3 %}hidden portrait:block lg:block
-    {% elsif view == 4 %}hidden portrait:block
-    {% endif %}" alt="">
-
-  <div class="flex--col stretch-x w--full h--full 4bit:bg--gray-75 2bit:bg--gray-75 bg--gray-75 p--1 lg:p--2 m--1 outline rounded {{gap}}
-    {% if view == 1 %}flex portrait:hidden
-    {% elsif view == 2 %}flex portrait:hidden lg:portrait:flex
-    {% elsif view == 3 %}hidden portrait:flex
-    {% elsif view == 4 %}flex portrait:hidden portrait:m::flex lg:portrait:hidden
-    {% endif %}">
-    <div class="label rounded rounded--small w--full text--stroke lcn-name no--shrink {{name_cls}}
-      {% if view == 1 %}label--large lg:label--xlarge
-      {% else %}label--base lg:label--large
-      {% endif %}" data-clamp="2"></div>
-
-    {% if view == 1 %}
-    <div class="lcn-fields flex flex--col w--full mt--1" data-overflow="true"></div>
-    {% elsif view == 2 %}
-    <div class="lcn-fields grid grid--cols-2 gap--xsmall w--full mt--1" data-overflow="true"></div>
-    {% else %}
-    <div class="lcn-fields flex flex--col w--full mt--1" data-overflow="true"></div>
-    {% endif %}
-
+<div class="layout lcn-layout h--full">
+  <img class="lcn-img lcn-img-l image image-dither image--contain h--full rounded" alt="">
+  <img class="lcn-img lcn-img-p image image-dither image--contain w--full rounded p--2" alt="">
+  <div class="lcn-panel flex--col stretch-x w--full h--full 4bit:bg--gray-75 2bit:bg--gray-75 bg--gray-75 p--1 lg:p--2 m--1 outline rounded">
+    <div class="lcn-name label rounded rounded--small w--full text--stroke" data-clamp="2"></div>
+    <div class="lcn-fields w--full mt--1{% if view == 2 %} grid grid--cols-2 gap--xsmall{% endif %}" data-overflow="true"></div>
     <div style="flex:1 1 0" class="h--min-4"></div>
-    <div class="lcn-flavor-row hidden w--full text--left {{flavour_cls}}">
+    <div class="lcn-flavor-row hidden w--full text--left description description--large lg:description--xlarge bg--gray-20 white__text rounded rounded--small m--0 p--0_5">
       <div class="lcn-flavor w--full" style="font-style:italic"></div>
     </div>
   </div>
 </div>
 
-<div class="title_bar
-  {% if view == 1 %}lg:portrait:hidden
-  {% elsif view == 2 %} hidden portrait:flex
-  {% elsif view == 3 %}hidden lg:flex lg:portrait:hidden
-  {% elsif view == 4 %}hidden
-  {% endif %}">
+<div class="lcn-title-bar title_bar">
   <img class="image h--8" src="https://github.com/ExcuseMi/trmnl-lorcana-cards-plugin/blob/main/assets/logo.png?raw=true" alt="Lorcana">
   <span class="title lcn-title text--stroke"></span>
-  {% if pool_warning %}<span class="label label--warning">{{ pool_warning }} cards</span>{% endif %}
-  <span class="instance p--2{% if view >= 3 %} md:portrait:hidden{% endif %} lcn-instance"></span>
+  <span class="lcn-pool-warning label label--warning" style="display:none"></span>
+  <span class="instance p--2 lcn-instance"></span>
 </div>
 
 <script>
@@ -111,8 +46,113 @@
     var host    = document.currentScript.closest('.view') || document.body;
     var pool    = __lcn || [];
     var cfg     = __cfg;
-    var V       = cfg.view;
     var viewIdx = views.indexOf(host) % 4;
+
+    // Screen state from .screen element classes
+    var screenEl = host.closest('.screen') || document.querySelector('.screen');
+    var sc       = screenEl ? screenEl.classList : { contains: function(){ return false; } };
+    var lg       = sc.contains('screen--lg');
+    var md       = !lg;
+    var portrait = sc.contains('screen--portrait');
+    var bit1     = sc.contains('screen--1bit');
+    var bit2     = sc.contains('screen--2bit');
+    var bit4     = sc.contains('screen--4bit');
+
+    var V = cfg.view;
+
+    // Per-view CSS config — all layout/class strings live here, not in Liquid
+    var VCFG = {
+      1: {
+        layout:   'layout--row gap--small',
+        imgL:     'portrait:hidden lg:portrait:block',
+        imgP:     'hidden portrait:block lg:portrait:hidden',
+        panel:    'flex portrait:hidden',
+        gap:      'gap--xsmall md:gap--xsmall lg:gap--small',
+        name:     'label--large lg:label--xlarge p--3',
+
+        lbl:      'label label--base lg:label--large pl--2 pr--3 pt--0_5 pb--0_5',
+        val:      'description description--large lg:description--xlarge bg--white rounded rounded--small pt--0_5 pb--0_5 pl--2 pr--2',
+        lblW:     'w--28 no-shrink',
+        titleBar: 'lg:portrait:hidden',
+        inst:     '',
+      },
+      2: {
+        layout:   'layout--row gap--small',
+        imgL:     '',
+        imgP:     'hidden',
+        panel:    'flex portrait:hidden lg:portrait:flex',
+        gap:      'md:gap--xsmall lg:gap--small portrait:gap--none lg:portrait:gap--small',
+        name:     'label--base lg:label--large p--2',
+
+        lbl:      'label label--small lg:label--base',
+        val:      'description description--base lg:description--large bg--white rounded rounded--small pt--0_5 pb--0_5 pl--2 pr--2',
+        lblW:     'w--24 no-shrink',
+        titleBar: 'hidden portrait:flex',
+        inst:     '',
+      },
+      3: {
+        layout:   'layout--col gap--small',
+        imgL:     'portrait:hidden lg:hidden',
+        imgP:     'hidden portrait:block lg:block',
+        panel:    'hidden portrait:flex',
+        gap:      'gap--xsmall md:gap--xsmall portrait:gap--xsmall lg:portrait:gap--small',
+        name:     'label--base lg:label--large p--2',
+
+        lbl:      'label label--small lg:label--base',
+        val:      'description description--base lg:description--large bg--white rounded rounded--small pt--0_5 pb--0_5 pl--2 pr--2',
+        lblW:     'w--20 no-shrink',
+        titleBar: 'hidden lg:flex lg:portrait:hidden',
+        inst:     'md:portrait:hidden',
+      },
+      4: {
+        layout:   'layout--row gap--small p--1',
+        imgL:     'portrait:hidden',
+        imgP:     'hidden portrait:block',
+        panel:    'flex portrait:hidden portrait:m::flex lg:portrait:hidden',
+        gap:      'md:gap--xsmall lg:gap--small portrait:gap--none lg:portrait:gap--small',
+        name:     'label--base lg:label--large p--2',
+
+        lbl:      'label label--small lg:label--base',
+        val:      'description description--base lg:description--large bg--white rounded rounded--small pt--0_5 pb--0_5 pl--2 pr--2',
+        lblW:     'w--16 no-shrink',
+        titleBar: 'hidden',
+        inst:     'md:portrait:hidden',
+      }
+    };
+    var vcfg = VCFG[V];
+
+    function addCls(el, str) {
+      if (!el || !str) return;
+      str.trim().split(/\s+/).forEach(function(c) { if (c) el.classList.add(c); });
+    }
+
+    function q(sel) { return host.querySelector(sel); }
+    var layoutEl   = q('.lcn-layout');
+    var imgL       = q('.lcn-img-l');
+    var imgP       = q('.lcn-img-p');
+    var panelEl    = q('.lcn-panel');
+    var nameEl     = q('.lcn-name');
+    var fieldsEl   = q('.lcn-fields');
+    var flavorRow  = q('.lcn-flavor-row');
+    var flavorEl   = q('.lcn-flavor');
+    var titleBarEl = q('.lcn-title-bar');
+    var titleEl    = q('.lcn-title');
+    var instEl     = q('.lcn-instance');
+    var poolWarnEl = q('.lcn-pool-warning');
+
+    addCls(layoutEl,   vcfg.layout);
+    addCls(imgL,       vcfg.imgL);
+    addCls(imgP,       vcfg.imgP);
+    addCls(panelEl,    vcfg.panel);
+    addCls(panelEl,    vcfg.gap);
+    addCls(nameEl,     vcfg.name);
+    addCls(titleBarEl, vcfg.titleBar);
+    addCls(instEl,     vcfg.inst);
+
+    if (poolWarnEl && cfg.poolWarning) {
+      poolWarnEl.textContent = cfg.poolWarning + ' cards';
+      poolWarnEl.style.display = '';
+    }
 
     var LABELS = {
       set:'Set', num:'No.', released:'Released', franchise:'Franchise',
@@ -121,13 +161,14 @@
     };
 
     // Field config per view. Strings = single row. Arrays = 2-col grid section.
-    // Views 2 & 4 are bp-objects: {md:[...], lg:[...]}.
+    // Views 2 & 4 are bp-objects {md:[...], lg:[...]}.
     var FIELDS = {
       1: ['set','num','released','franchise','ink','type','rarity','artist',
           ['cost','lore','str','will']],
       2: {
         md: ['set','num','released','franchise','ink','type','rarity'],
-        lg: ['set','num','released','franchise','ink','type','rarity','artist','cost','lore','str','will']
+        lg: ['set','num','released','franchise','ink','type','rarity','artist',
+             'cost','lore','str','will']
       },
       3: ['set','num','released','franchise','ink','type','rarity','artist',
           'cost','lore','str','will'],
@@ -137,15 +178,6 @@
              'lore','str','will']
       }
     };
-
-    var screenEl = host.closest('.screen') || document.querySelector('.screen');
-    var sc       = screenEl ? screenEl.classList : { contains: function(){ return false; } };
-    var lg       = sc.contains('screen--lg');
-    var md       = !lg;
-    var portrait = sc.contains('screen--portrait');
-    var bit1     = sc.contains('screen--1bit');
-    var bit2     = sc.contains('screen--2bit');
-    var bit4     = sc.contains('screen--4bit');
 
     function getFields() {
       var def = FIELDS[V];
@@ -189,10 +221,10 @@
       var inner = document.createElement('div');
       inner.className = 'content flex flex--row flex--center-y gap--small';
       var lbl = document.createElement('span');
-      lbl.className = cfg.lblCls + ' ' + cfg.lblW;
+      lbl.className = vcfg.lbl + ' ' + vcfg.lblW;
       lbl.textContent = LABELS[k] || k;
       var val = document.createElement('span');
-      val.className = cfg.valCls;
+      val.className = vcfg.val;
       val.textContent = String(v);
       inner.appendChild(lbl);
       inner.appendChild(val);
@@ -209,7 +241,6 @@
         var pairs = keys.map(function(k) { return { k: k, v: getValue(item, k) }; })
                         .filter(function(p) { return p.v != null; });
         if (!pairs.length) return;
-
         if (keys.length > 1) {
           var g = document.createElement('div');
           g.className = 'grid grid--cols-2 gap--xsmall w--full';
@@ -222,14 +253,7 @@
       });
     }
 
-    function q(sel) { return host.querySelector(sel); }
-    var titleEl   = q('.lcn-title');
-    var instEl    = q('.lcn-instance');
-    var nameEl    = q('.lcn-name');
-    var fieldsEl  = q('.lcn-fields');
-    var flavorRow = q('.lcn-flavor-row');
-    var flavorEl  = q('.lcn-flavor');
-    var nameBase  = nameEl ? nameEl.className : '';
+    var nameBase = nameEl ? nameEl.className : '';
 
     if (!pool.length) {
       if (titleEl) titleEl.textContent = cfg.name;
@@ -278,10 +302,11 @@
 
       var showFlavor = item.flavor_text &&
                        (V !== 4 || (lg && item.flavor_text.length <= 75));
-      var maxFields = V === 4 ? (showFlavor ? 4 : 6)
-                   : V === 2 ? (showFlavor ? (lg ? 10 : 6) : 12)
-                   : Infinity;
+      var maxFields  = V === 4 ? (showFlavor ? 4 : 6)
+                     : V === 2 ? (showFlavor ? (lg ? 10 : 6) : 12)
+                     : Infinity;
       if (fieldsEl) renderFields(fieldsEl, item, maxFields);
+
       if (showFlavor) {
         if (flavorEl)  flavorEl.textContent = item.flavor_text;
         if (flavorRow) flavorRow.classList.remove('hidden');
