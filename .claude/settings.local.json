@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:api.lorcana-api.com)"
+      "WebFetch(domain:api.lorcana-api.com)",
+      "Skill(trmnl)",
+      "Bash(git *)",
+      "Bash(python3 -)",
+      "WebSearch"
     ]
   }
 }

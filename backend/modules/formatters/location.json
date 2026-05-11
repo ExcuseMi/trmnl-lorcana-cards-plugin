@@ -1,0 +1,22 @@
+{
+  "Artist": "Andreas Rocha",
+  "Set_Name": "Azurite Sea",
+  "Date_Added": "2024-12-03T02:41:11",
+  "Set_Num": 6,
+  "Color": "Amber",
+  "Franchise": "Winnie the Pooh",
+  "Image": "https://lorcana-api.com/images/hundred_acre_island/pooh's_home/hundred_acre_island-pooh's_home-large.png",
+  "Cost": 1,
+  "Inkable": false,
+  "Name": "Hundred Acre Island - Pooh's Home",
+  "Type": "Location",
+  "Lore": 0,
+  "Rarity": "Common",
+  "Unique_ID": "AZS-034",
+  "Card_Num": 34,
+  "Body_Text": "FRIENDS FOREVER - During an opponent's turn, whenever a character is banished while here, gain 1 lore.",
+  "Willpower": 5,
+  "Date_Modified": "2024-12-03 04:11:08.0",
+  "Strength": 0,
+  "Set_ID": "AZS"
+}

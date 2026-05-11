@@ -19,6 +19,7 @@ def shape_card(raw: dict) -> dict:
         'set_num': raw.get('Set_Num', ''),
         'artist': raw.get('Artist', ''),
         'classifications': classifications,
+        'body_text': raw.get('Body_Text', ''),
         'flavor_text': raw.get('Flavor_Text', ''),
         'image': raw.get('Image', ''),
         'franchise': raw.get('Franchise', ''),

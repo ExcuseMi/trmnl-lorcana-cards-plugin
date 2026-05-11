@@ -1,0 +1,21 @@
+{
+  "Artist": "Andrea Femerstrand",
+  "Set_Name": "Archazia's Island",
+  "Classifications": "Song",
+  "Date_Added": "2025-03-08T22:29:21",
+  "Set_Num": 7,
+  "Color": "Amber",
+  "Gamemode": "Lorcana",
+  "Franchise": "Bolt",
+  "Image": "https://lorcana-api.com/images/so_much_to_give/so_much_to_give-large.png",
+  "Cost": 2,
+  "Inkable": true,
+  "Name": "So Much To Give",
+  "Type": "Action - Song",
+  "Rarity": "Common",
+  "Unique_ID": "ARI-038",
+  "Card_Num": 38,
+  "Body_Text": "(A character with cost 2 or more can {e} to sing this song for free.)\nDraw a card. Chosen character gains Bodyguard until the start of your next turn. (An opposing character who challenges one of your characters must choose one with Bodyguard if able.)",
+  "Date_Modified": "2025-06-02 03:26:55.0",
+  "Set_ID": "ARI"
+}

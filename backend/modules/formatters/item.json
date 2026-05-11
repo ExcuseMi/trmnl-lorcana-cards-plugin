@@ -1,0 +1,21 @@
+{
+  "Artist": "Francesco Colucci",
+  "Set_Name": "Archazia's Island",
+  "Date_Added": "2025-03-08T22:29:21",
+  "Set_Num": 7,
+  "Color": "Amber",
+  "Gamemode": "Lorcana",
+  "Franchise": "Lorcana",
+  "Image": "https://lorcana-api.com/images/amber_coil/amber_coil-large.png",
+  "Cost": 1,
+  "Inkable": true,
+  "Name": "Amber Coil",
+  "Type": "Item",
+  "Rarity": "Uncommon",
+  "Flavor_Text": "Martin smiled as the coil snapped into place and he felt a surge of healing energy.",
+  "Unique_ID": "ARI-041",
+  "Card_Num": 41,
+  "Body_Text": "HEALING AURA: During your turn, whenever a card is put into your inkwell, you may remove up to 2 damage from chosen character.",
+  "Date_Modified": "2025-03-09 00:50:35.0",
+  "Set_ID": "ARI"
+}

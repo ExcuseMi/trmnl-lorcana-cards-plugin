@@ -14,10 +14,14 @@
   <img class="lcn-img lcn-img-l image image-dither image--contain h--full rounded" alt="">
   <img class="lcn-img lcn-img-p image image-dither image--contain w--full rounded p--2" alt="">
   <div class="lcn-panel flex--col stretch-x w--full h--full 4bit:bg--gray-75 2bit:bg--gray-75 bg--gray-75 p--1 lg:p--2 m--1 outline rounded">
-    <div class="lcn-name label rounded rounded--small w--full text--stroke" data-clamp="2"></div>
-    <div class="lcn-fields w--full mt--1{% if view == 2 %} grid grid--cols-2 gap--xsmall{% endif %}" data-overflow="true"></div>
-    <div style="flex:1 1 0" class="h--min-4"></div>
-    <div class="lcn-flavor-row hidden w--full text--left description description--large lg:description--xlarge bg--gray-20 white__text rounded rounded--small m--0 p--0_5">
+    <div class="lcn-name label rounded rounded--small w--full text--stroke">
+      <div class="lcn-name-main" data-clamp="1"></div>
+      <div class="lcn-name-sub label--small" data-clamp="1"></div>
+    </div>
+    <div class="lcn-fields w--full mt--1{% if view == 2 %} grid grid--cols-2 gap--xsmall{% endif %}" ></div>
+    <div class="lcn-body hidden w--full description description--base lg:description--large m--0 p--0_5"></div>
+    <div style="flex:1 1 0" class="h--min-1"></div>
+    <div class="lcn-flavor-row hidden w--full text--left description {% if view != 4 %}description--large lg:description--xlarge{% else %}description--base lg:description--large {% endif %} bg--gray-20 white__text rounded rounded--small m--0 p--0_5">
       <div class="lcn-flavor w--full" style="font-style:italic"></div>
     </div>
   </div>
@@ -67,7 +71,9 @@
         imgL:     'portrait:hidden lg:portrait:block',
         imgP:     'hidden portrait:block lg:portrait:hidden',
         panel:    'flex portrait:hidden',
-        gap:      'gap--xsmall md:gap--xsmall lg:gap--small',
+        gap:      'gap--small md:gap--small lg:gap--small',
+        fieldsGap:'flex flex--col gap--small lg:gap--medium',
+        gridGap:  'gap--small lg:gap--medium',
         name:     'label--large lg:label--xlarge p--3',
 
         lbl:      'label label--base lg:label--large pl--2 pr--3 pt--0_5 pb--0_5',
@@ -81,7 +87,8 @@
         imgL:     '',
         imgP:     'hidden',
         panel:    'flex portrait:hidden lg:portrait:flex',
-        gap:      'md:gap--xsmall lg:gap--small portrait:gap--none lg:portrait:gap--small',
+        gap:      'md:gap--small lg:gap--small portrait:gap--none lg:portrait:gap--small',
+        fieldsGap:'',
         name:     'label--base lg:label--large p--2',
 
         lbl:      'label label--small lg:label--base',
@@ -95,7 +102,8 @@
         imgL:     'portrait:hidden lg:hidden',
         imgP:     'hidden portrait:block lg:block',
         panel:    'hidden portrait:flex',
-        gap:      'gap--xsmall md:gap--xsmall portrait:gap--xsmall lg:portrait:gap--small',
+        gap:      'gap--small md:gap--small portrait:gap--small lg:portrait:gap--small',
+        fieldsGap:'flex flex--col gap--medium',
         name:     'label--base lg:label--large p--2',
 
         lbl:      'label label--small lg:label--base',
@@ -109,7 +117,8 @@
         imgL:     'portrait:hidden',
         imgP:     'hidden portrait:block',
         panel:    'flex portrait:hidden portrait:m::flex lg:portrait:hidden',
-        gap:      'md:gap--xsmall lg:gap--small portrait:gap--none lg:portrait:gap--small',
+        gap:      'md:gap--small lg:gap--small portrait:gap--none lg:portrait:gap--small',
+        fieldsGap:'flex flex--col gap--small',
         name:     'label--base lg:label--large p--2',
 
         lbl:      'label label--small lg:label--base',
@@ -132,7 +141,10 @@
     var imgP       = q('.lcn-img-p');
     var panelEl    = q('.lcn-panel');
     var nameEl     = q('.lcn-name');
+    var nameMainEl = q('.lcn-name-main');
+    var nameSubEl  = q('.lcn-name-sub');
     var fieldsEl   = q('.lcn-fields');
+    var bodyEl     = q('.lcn-body');
     var flavorRow  = q('.lcn-flavor-row');
     var flavorEl   = q('.lcn-flavor');
     var titleBarEl = q('.lcn-title-bar');
@@ -145,6 +157,7 @@
     addCls(imgP,       vcfg.imgP);
     addCls(panelEl,    vcfg.panel);
     addCls(panelEl,    vcfg.gap);
+    addCls(fieldsEl,   vcfg.fieldsGap);
     addCls(nameEl,     vcfg.name);
     addCls(titleBarEl, vcfg.titleBar);
     addCls(instEl,     vcfg.inst);
@@ -164,11 +177,10 @@
     // Views 2 & 4 are bp-objects {md:[...], lg:[...]}.
     var FIELDS = {
       1: ['set','num','released','franchise','ink','type','rarity','artist',
-          ['cost','lore','str','will']],
+          'cost','lore','str','will'],
       2: {
-        md: ['set','num','released','franchise','ink','type','rarity'],
-        lg: ['set','num','released','franchise','ink','type','rarity','artist',
-             'cost','lore','str','will']
+        md: ['set','num','released','franchise','ink','type','rarity','artist','cost','lore','str','will'],
+        lg: ['set','num','released','franchise','ink','type','rarity','artist','cost','lore','str','will']
       },
       3: ['set','num','released','franchise','ink','type','rarity','artist',
           'cost','lore','str','will'],
@@ -243,7 +255,7 @@
         if (!pairs.length) return;
         if (keys.length > 1) {
           var g = document.createElement('div');
-          g.className = 'grid grid--cols-2 gap--xsmall w--full';
+          g.className = 'grid grid--cols-2 ' + (vcfg.gridGap || 'gap--xsmall') + ' w--full';
           pairs.forEach(function(p) { g.appendChild(makeRow(p.k, p.v)); });
           el.appendChild(g);
         } else {
@@ -301,9 +313,9 @@
       imgs.forEach(function(img) { img.onerror = onImgError; img.src = item.image; img.alt = item.name || ''; });
 
       var showFlavor = item.flavor_text &&
-                       (V !== 4 || (lg && item.flavor_text.length <= 75));
-      var maxFields  = V === 4 ? (showFlavor ? 4 : 6)
-                     : V === 2 ? (showFlavor ? (lg ? 10 : 6) : 12)
+                       (V !== 4 || item.flavor_text.length <= 75);
+      var maxFields  = V === 4 ? (showFlavor ? (lg ? 5 : 4) : 7)
+                     : V === 2 ? (showFlavor ? (lg ? 12 : 10) : 12)
                      : Infinity;
       if (fieldsEl) renderFields(fieldsEl, item, maxFields);
 

@@ -1,0 +1,21 @@
+{
+  "Artist": "Nicola Saviori / Livio Cacciatore",
+  "Set_Name": "Archazia's Island",
+  "Classifications": "Remove up to 3 damage from chosen character or location. Draw a card.",
+  "Date_Added": "2025-03-08T22:29:21",
+  "Set_Num": 7,
+  "Color": "Amber, Sapphire",
+  "Gamemode": "Lorcana",
+  "Franchise": "Moana",
+  "Image": "https://lorcana-api.com/images/restoring_the_heart/restoring_the_heart-large.png",
+  "Cost": 1,
+  "Inkable": true,
+  "Name": "Restoring the Heart",
+  "Type": "Action",
+  "Rarity": "Uncommon",
+  "Flavor_Text": "The moment her heart was returned, greenery burst to life and restored Te Fiti to her rightful form.",
+  "Unique_ID": "ARI-039",
+  "Card_Num": 39,
+  "Date_Modified": "2025-03-09 00:50:35.0",
+  "Set_ID": "ARI"
+}
