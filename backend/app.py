@@ -42,7 +42,7 @@ async def card():
     colors = ','.join(sorted(_parse_multi(request.args.get('color', ''))))
     rarities = ','.join(sorted(_parse_multi(request.args.get('rarity', ''))))
     card_type = request.args.get('card_type', '').strip()
-    set_id = request.args.get('set_id', '').strip()
+    set_id = request.args.get('set_id', '').split('::')[0].strip()
 
     args = dict(color=colors, rarity=rarities, card_type=card_type, set_id=set_id)
     ttl = REFRESH_HOURS * 3600
