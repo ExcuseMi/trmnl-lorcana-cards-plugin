@@ -6,11 +6,11 @@ function transform(input) {
     will: 'Willpower',
     type: 'Type',
     rarity: 'Rarity',
-    set: 'Set',
     artist: 'Artist',
     ink: 'Ink',
     inkable: 'Inkable',
     franchise: 'Franchise',
+    set: 'Set',
     num: 'No.',
     released: 'Released',
   };

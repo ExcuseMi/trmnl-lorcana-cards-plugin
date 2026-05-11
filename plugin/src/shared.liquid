@@ -17,12 +17,12 @@
         {% assign first_column_label_width = "w--24 no-shrink" %}
         {% assign dual_column_label_width = "w--24 no-shrink" %}
     {% elsif view == 3 %}
-        {% assign first_column_label_width = "w--24 no-shrink" %}
-        {% assign dual_column_label_width = "w--24 no-shrink" %}
+        {% assign first_column_label_width = "w--20 no-shrink" %}
+        {% assign dual_column_label_width = "w--20 no-shrink" %}
         {% assign gap = "gap--xsmall md:gap--xsmall portrait:gap--xsmall lg:portrait:gap--small" %}
     {% elsif view == 4 %}
-        {% assign first_column_label_width = "w--24 no-shrink" %}
-        {% assign dual_column_label_width = "w--24 no-shrink" %}
+        {% assign first_column_label_width = "w--16 no-shrink" %}
+        {% assign dual_column_label_width = "w--16 no-shrink" %}
     {% endif %}
 {% endif %}
 
@@ -70,7 +70,7 @@
       label--base lg:label--large
       {% endif %}" data-clamp="2"></div>
 
-    <div class="w--full {{gap}} p--0 m--0 mt--1 {% if view == 2 %}grid grid--cols-2 lg:portrait:grid--cols-1 gap--none{% else %}flex flex--col{% endif %}">
+    <div class="w--full {{gap}} p--0 m--0 mt--1 {% if view == 2 %}grid grid--cols-2 lg:portrait:grid--cols-1 gap--none{% else %}flex flex--col{% endif %}" data-overflow="true">
       {% if view == 1 %}
       <div class="item lcn-franchise-row hidden">
         <div class="content flex flex--row flex--center-y gap--small">
@@ -106,6 +106,12 @@
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.artist }}</span>
           <span class="{{ val_cls }} lcn-artist"></span>
+        </div>
+      </div>
+      <div class="item lcn-set-row hidden">
+        <div class="content flex flex--row flex--center-y gap--small">
+          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.set }}</span>
+          <span class="{{ val_cls }} lcn-set"></span>
         </div>
       </div>
       <div class="item lcn-num-row hidden">
@@ -169,28 +175,16 @@
         </div>
       </div>
       {{- '<!-- stats -->' }}
-      <div class="item lcn-cost-row hidden {% if view == 4 %} md:hidden lg:flex {% endif %}">
+      <div class="item lcn-cost-row hidden md:hidden lg:flex lg:portrait:hidden">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.cost }}</span>
           <span class="{{ val_cls }} lcn-cost"></span>
         </div>
       </div>
-      <div class="item lcn-lore-row hidden {% if view == 4 %}md:hidden lg:flex {% endif %}">
+      <div class="item lcn-lore-row hidden md:hidden lg:flex lg:portrait:hidden">
         <div class="content flex flex--row flex--center-y gap--small">
           <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.lore }}</span>
           <span class="{{ val_cls }} lcn-lore"></span>
-        </div>
-      </div>
-      <div class="item lcn-str-row hidden md:hidden lg:flex">
-        <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.str }}</span>
-          <span class="{{ val_cls }} lcn-str"></span>
-        </div>
-      </div>
-      <div class="item lcn-will-row hidden md:hidden lg:flex">
-        <div class="content flex flex--row flex--center-y gap--small">
-          <span class="{{ lbl_cls }} {{dual_column_label_width}}">{{ labels.will }}</span>
-          <span class="{{ val_cls }} lcn-will"></span>
         </div>
       </div>
       {{- '<!-- more info -->' }}
