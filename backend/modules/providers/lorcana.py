@@ -1,3 +1,4 @@
+import json
 import logging
 import random
 
@@ -30,7 +31,12 @@ class LorcanaProvider(BaseProvider):
                     f'{LORCANA_API}/bulk/cards', timeout=aiohttp.ClientTimeout(total=30)
                 ) as resp:
                     resp.raise_for_status()
-                    raw = await resp.json()
+                    raw_bytes = await resp.read()
+            try:
+                text = raw_bytes.decode('utf-8')
+            except UnicodeDecodeError:
+                text = raw_bytes.decode('latin-1')
+            raw = json.loads(text)
         except Exception as exc:
             log.error('Error fetching lorcana cards: %s', exc)
             return None
