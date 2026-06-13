@@ -49,7 +49,7 @@ The backend expects a Redis instance. Docker Compose starts one automatically.
 <!-- PLUGIN_STATS_START -->
 ## 🚀 TRMNL Plugin(s)
 
-*Last updated: 2026-06-12 10:06:40 UTC*
+*Last updated: 2026-06-13 08:54:11 UTC*
 
 
 ## <img src="assets/plugin-images/298482_icon.png" alt="Lorcana Cards icon" width="32"/> [Lorcana Cards](https://trmnl.com/recipes/298482)
